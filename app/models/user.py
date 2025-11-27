@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from app.db.base import Base
 from sqlalchemy.orm import relationship
+from .message import Message
 
 
 class User(Base):
