@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      VERA_ENDPOINT: ${VERA_ENDPOINT}
+      VERA_API_KEY: ${VERA_API_KEY}
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:

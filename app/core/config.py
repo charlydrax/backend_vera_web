@@ -2,14 +2,16 @@ from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+from app.core.config import settings
+
 # Chemin vers le .env
 env_path = Path(__file__).resolve().parent.parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 
 # Variables
-VERA_API_KEY = os.getenv("VERA_API_KEY")
-VERA_ENDPOINT = os.getenv("VERA_ENDPOINT")
+VERA_API_KEY = settings.VERA_API_KEY
+VERA_ENDPOINT = settings.VERA_ENDPOINT
 
 if not VERA_API_KEY or not VERA_ENDPOINT:
     raise RuntimeError("VERA_API_KEY or VERA_ENDPOINT is not defined in .env", VERA_API_KEY)
@@ -19,6 +21,8 @@ class Settings(BaseSettings):
     POSTGRES_USER: str | None = None
     POSTGRES_PASSWORD: str | None = None
     POSTGRES_DB: str | None = None
+    VERA_ENDPOINT: str | None = None
+    VERA_API_KEY: str | None = None
 
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60*24
