@@ -14,3 +14,6 @@ class MessageOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+class MessageRequest(BaseModel):
+    message: str

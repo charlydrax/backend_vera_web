@@ -1,4 +1,18 @@
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+import os
+from pathlib import Path
+# Chemin vers le .env
+env_path = Path(__file__).resolve().parent.parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
+
+# Variables
+VERA_API_KEY = os.getenv("VERA_API_KEY")
+VERA_ENDPOINT = os.getenv("VERA_ENDPOINT")
+
+if not VERA_API_KEY or not VERA_ENDPOINT:
+    raise RuntimeError("VERA_API_KEY or VERA_ENDPOINT is not defined in .env", VERA_API_KEY)
 
 class Settings(BaseSettings):
     DATABASE_URL: str | None = None  # Railway la fournit
