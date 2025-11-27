@@ -4,13 +4,18 @@ from sqlalchemy import select
 from app.models import user
 from app.schemas import user as schemas
 from app.security.security import get_password_hash
+from sqlalchemy.orm import Session
+
 
 async def get_user_by_email(db: AsyncSession, email: str):
     result = await db.execute(select(user.User).filter(user.User.email == email))
     return result.scalars().first()
 
+
 async def create_user(db: AsyncSession, user_in: schemas.UserCreate):
+    print('avant le hash')
     hashed = get_password_hash(user_in.password)
+    print('après le hash')
     db_user = user.User(
         email=user_in.email,
         hashed_password=hashed,
@@ -20,3 +25,12 @@ async def create_user(db: AsyncSession, user_in: schemas.UserCreate):
     await db.commit()
     await db.refresh(db_user)
     return db_user
+
+
+# def get_all_emails(db: Session):
+#     return db.query(user.User.email).all()
+
+
+async def get_all_emails(db: AsyncSession):
+    result = await db.execute(select(user.User.email))
+    return result.scalars().all()

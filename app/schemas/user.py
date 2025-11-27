@@ -8,6 +8,10 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
 class UserOut(UserBase):
     id: int
     is_active: bool
@@ -19,3 +23,10 @@ class UserOut(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+class UserEmail(BaseModel):
+    email: str
+
+    class Config:
+        orm_mode = True
