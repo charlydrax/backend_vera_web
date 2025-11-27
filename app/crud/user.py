@@ -13,9 +13,7 @@ async def get_user_by_email(db: AsyncSession, email: str):
 
 
 async def create_user(db: AsyncSession, user_in: schemas.UserCreate):
-    print('avant le hash')
     hashed = get_password_hash(user_in.password)
-    print('après le hash')
     db_user = user.User(
         email=user_in.email,
         hashed_password=hashed,

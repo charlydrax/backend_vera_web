@@ -10,12 +10,9 @@ MAX_BCRYPT_BYTES = 72  # Limite bcrypt
 
 def get_password_hash(password: str):
     # SHA-256 -> bytes
-    print('mes2couilles')
     sha256_bytes = hashlib.sha256(password.encode()).digest()
     # tronquer si nécessaire à 72 bytes
-    print(sha256_bytes)
     truncated = sha256_bytes[:MAX_BCRYPT_BYTES]
-    print('trinqué', truncated)
     return pwd_context.hash(truncated)
 
 def verify_password(plain_password, hashed_password):
