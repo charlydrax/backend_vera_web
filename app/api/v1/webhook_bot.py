@@ -1,13 +1,13 @@
-from fastapi import FastAPI, Request
-import os
+from fastapi import FastAPI, Request, APIRouter
 from utils.telegram import send_message, download_telegram_file
 from utils.video import video_to_text
 from utils.image import image_to_text
 from utils.vera import ask_vera
 
-app = FastAPI()
+# app = FastAPI()
+router = APIRouter(prefix="/webhook", tags=["webhook"])
 
-@app.post("/webhook")
+@router.post("/")
 async def telegram_webhook(request: Request):
     update = await request.json()
 
