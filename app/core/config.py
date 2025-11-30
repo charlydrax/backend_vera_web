@@ -16,6 +16,10 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60*24
 
+    GOOGLE_SHEETS_API_KEY: str
+    GOOGLE_SHEETS_SPREADSHEET_ID: str
+    GOOGLE_SHEETS_RANGE: str = "Réponses au formulaire 1!A1:Z1000"
+
     @property
     def database_url(self) -> str:
         """
@@ -25,7 +29,7 @@ class Settings(BaseSettings):
         if self.DATABASE_URL:
             return self.DATABASE_URL
 
-        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@localhost:5433/{self.POSTGRES_DB}"
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@localhost:5440/{self.POSTGRES_DB}"
 
     class Config:
         env_file = str(Path(__file__).resolve().parent.parent.parent / ".env")
