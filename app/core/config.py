@@ -2,18 +2,18 @@ from pydantic_settings import BaseSettings
 from pathlib import Path
 
 class Settings(BaseSettings):
-    # Variables de Vera
-    VERA_API_KEY: str
-    VERA_ENDPOINT: str
 
     # Variables pour la DB
     DATABASE_URL: str | None = None  # Railway la fournit
     POSTGRES_USER: str | None = None
     POSTGRES_PASSWORD: str | None = None
     POSTGRES_DB: str | None = None
+    TELEGRAM_TOKEN: str | None = None
+    VERA_ENDPOINT: str | None = None
+    VERA_API_KEY: str | None = None
+    SECRET_KEY: str | None = None
+    VERA_USER_ID: str | None = None
 
-    # Sécurité
-    SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60*24
 
     GOOGLE_SHEETS_API_KEY: str
