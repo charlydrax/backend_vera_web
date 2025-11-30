@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Request, APIRouter
-from utils.telegram import send_message, download_telegram_file
-from utils.video import video_to_text
-from utils.image import image_to_text
-from utils.vera import ask_vera
+from fastapi import Request, APIRouter
+from ...utils.telegram import send_message, download_telegram_file
+from ...utils.video import video_to_text
+from ...utils.image import image_to_text
+from ...utils.vera import ask_vera
 
 # app = FastAPI()
 router = APIRouter(prefix="/webhook", tags=["webhook"])

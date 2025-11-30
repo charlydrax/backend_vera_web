@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1 import auth, messages
+from app.api.v1 import auth, messages, webhook_bot
 from app.db.base import Base
 from app.db.session import engine
 from dotenv import load_dotenv
@@ -26,6 +26,7 @@ app.add_middleware(
 # app.include_router(auth.router, prefix="/api/v1")
 app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
 app.include_router(messages.router, prefix="/api/v1", tags=["messages"])
+app.include_router(webhook_bot.router, prefix="/api/v1", tags=["webhook"])
 
 # Initialisation async des tables
 @app.on_event("startup")
