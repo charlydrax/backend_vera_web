@@ -15,7 +15,7 @@ router = APIRouter(prefix="/messages", tags=["messages"])
 async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db), user = Depends(get_current_user)):
     async with httpx.AsyncClient() as client:
         payload = {
-            "userId": f"user_{user.id}" if user else "anon",
+            "userId": "anon",
             "query": msg.message
         }
         headers = {

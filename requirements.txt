@@ -11,3 +11,11 @@ pydantic
 pydantic-settings
 email-validator
 httpx
+
+# For Bot Telegram
+python-multipart
+opencv-python-headless
+ffmpeg-python
+whisper
+pytesseract
+Pillow
