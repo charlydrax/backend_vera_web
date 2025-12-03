@@ -17,7 +17,7 @@ app = FastAPI(title="MyApp API")
 # CORS — autoriser Angular (dev)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],  # adapter pour prod
+    allow_origins=["https://vera-front-eight.vercel.app"],  # adapter pour prod
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
