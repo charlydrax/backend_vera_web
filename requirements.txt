@@ -16,6 +16,6 @@ httpx
 python-multipart
 opencv-python-headless
 ffmpeg-python
-whisper
+openai-whisper
 pytesseract
 Pillow
