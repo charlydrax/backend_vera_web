@@ -1,7 +1,7 @@
 import ffmpeg
 import os
 import subprocess
-from utils.whisper_engine import transcribe_audio
+from .whisper_engine import transcribe_audio
 
 def video_to_text(video_path):
     audio_path = "/tmp/audio.wav"

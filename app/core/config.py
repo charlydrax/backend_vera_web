@@ -29,7 +29,7 @@ class Settings(BaseSettings):
         if self.DATABASE_URL:
             return self.DATABASE_URL
 
-        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@localhost:5440/{self.POSTGRES_DB}"
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@localhost:5433/{self.POSTGRES_DB}"
 
     class Config:
         env_file = str(Path(__file__).resolve().parent.parent.parent / ".env")
