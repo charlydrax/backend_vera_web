@@ -1,23 +1,23 @@
-fastapi
-uvicorn[standard]
-sqlalchemy>=1.4
-asyncpg
-alembic
-python-dotenv
-passlib[bcrypt]
+# FastAPI + DB
+fastapi==0.123.5
+uvicorn[standard]==0.38.0
+sqlalchemy==2.0.44
+asyncpg==0.31.0
+alembic==1.17.2
+python-dotenv==1.2.1
+passlib[bcrypt]==1.7.4
 bcrypt==4.3.0
-python-jose[cryptography]
-pydantic
-pydantic-settings
-email-validator
-httpx
-greenlet
+python-jose[cryptography]==3.5.0
+pydantic==2.12.5
+pydantic-settings==2.12.0
+email-validator==2.3.0
+httpx==0.28.1
+greenlet==3.2.4
 
-
-# For Bot Telegram
-python-multipart
-opencv-python-headless
-ffmpeg-python
-openai-whisper
-pytesseract
-Pillow
+# Telegram Bot
+python-multipart==0.0.20
+opencv-python-headless==4.12.0.88
+ffmpeg-python==0.2.0
+openai-whisper==20250625
+pytesseract==0.3.13
+torch==2.9.1
