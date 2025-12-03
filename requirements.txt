@@ -11,6 +11,8 @@ pydantic
 pydantic-settings
 email-validator
 httpx
+greenlet
+
 
 # For Bot Telegram
 python-multipart
