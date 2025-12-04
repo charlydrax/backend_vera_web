@@ -15,17 +15,15 @@ env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 app = FastAPI(title="MyApp API")
-origins = [
-    "http://localhost:4200",
-    "http://localhost",
-    "https://vera-front-eight.vercel.app",
-    "https://vera-front-git-main-celias-projects-19b36730.vercel.app",
-]
 
 # CORS — autoriser Angular (dev + prod)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "http://localhost:4200",
+        "https://vera-front-eight.vercel.app",
+        "https://vera-front-git-main-celias-projects-19b36730.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
