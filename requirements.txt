@@ -14,9 +14,9 @@ httpx
 greenlet
 
 # For Bot Telegram
-python-multipart
-opencv-python-headless
-ffmpeg-python
-whisper
-pytesseract
-Pillow
+# python-multipart
+# opencv-python-headless
+# ffmpeg-python
+# openai-whisper
+# pytesseract
+# Pillow

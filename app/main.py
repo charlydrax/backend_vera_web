@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1 import auth, messages, results
+from app.api.v1 import auth, messages, webhook_bot, results
 from app.db.base import Base
 from app.db.session import engine
 from dotenv import load_dotenv
@@ -31,6 +31,7 @@ app.add_middleware(
 # ROUTES EXISTANTES
 app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
 app.include_router(messages.router, prefix="/api/v1", tags=["messages"])
+app.include_router(webhook_bot.router, prefix="/api/v1", tags=["webhook"])
 app.include_router(results.router, prefix="/api/v1", tags=["results"])
 
 @app.get("/api/v1/survey/results")
