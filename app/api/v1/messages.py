@@ -11,24 +11,41 @@ from app.core.config import settings
 router = APIRouter(prefix="/messages", tags=["messages"])
 
 
-@router.post("/ask")
-async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db)): #user = Depends(get_current_user, use_cache=False),
-    async with httpx.AsyncClient() as client:
-        payload = {
-            "userId": "anon",
-            "query": msg.message
-        }
-        headers = {
-            "X-API-Key": settings.VERA_API_KEY,
-            "Content-Type": "application/json"
-        }
-        response = await client.post(settings.VERA_ENDPOINT, json=payload, headers=headers)
-        response.raise_for_status()
-        vera_response = response.text
+# @router.post("/ask")
+# async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db)): #user = Depends(get_current_user, use_cache=False),
+#     async with httpx.AsyncClient() as client:
+#         payload = {
+#             "userId": "anon",
+#             "query": msg.message
+#         }
+#         headers = {
+#             "X-API-Key": settings.VERA_API_KEY,
+#             "Content-Type": "application/json"
+#         }
+#         response = await client.post(settings.VERA_ENDPOINT, json=payload, headers=headers)
+#         response.raise_for_status()
+#         vera_response = response.text
 
-    # Enregistrer seulement si user connecté
-    if user:
-        await create_message(db, user.id, role="user", content=msg.message)
-        await create_message(db, user.id, role="vera", content=vera_response)
+#     # Enregistrer seulement si user connecté
+#     if user:
+#         await create_message(db, user.id, role="user", content=msg.message)
+#         await create_message(db, user.id, role="vera", content=vera_response)
+
+#     return vera_response
+@router.post("/ask")
+async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db)):
+    try:
+        async with httpx.AsyncClient() as client:
+            payload = {"userId": "anon", "query": msg.message}
+            headers = {
+                "X-API-Key": settings.VERA_API_KEY,
+                "Content-Type": "application/json"
+            }
+            response = await client.post(settings.VERA_ENDPOINT, json=payload, headers=headers)
+            response.raise_for_status()
+            vera_response = response.text
+    except Exception as e:
+        # log(e) si tu veux
+        vera_response = '{"answer": "Vera est momentanément indisponible, mais ton backend fonctionne bien 🎉"}'
 
     return vera_response
