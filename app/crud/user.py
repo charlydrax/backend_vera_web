@@ -11,7 +11,6 @@ async def get_user_by_email(db: AsyncSession, email: str):
     result = await db.execute(select(user.User).filter(user.User.email == email))
     return result.scalars().first()
 
-
 async def create_user(db: AsyncSession, user_in: schemas.UserCreate):
     hashed = get_password_hash(user_in.password)
     db_user = user.User(
@@ -23,7 +22,6 @@ async def create_user(db: AsyncSession, user_in: schemas.UserCreate):
     await db.commit()
     await db.refresh(db_user)
     return db_user
-
 
 # def get_all_emails(db: Session):
 #     return db.query(user.User.email).all()

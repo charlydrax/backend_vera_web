@@ -26,10 +26,10 @@ async def login(form_data: LoginRequest, db: AsyncSession = Depends(get_db)):
     if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect credentials")
     token = create_access_token({"sub": str(user.id), "email": user.email})
-    return {"access_token": token, "token_type": "bearer"}
+    return {"access_token": token, "token_type": "bearer", "is_admin": user.is_superuser}
 
 
 @router.get('/emails', response_model=list[UserEmail])
 async def list_user_emails(db: AsyncSession = Depends(get_db)):
-    emails = await get_all_emails(db)  # ⬅️ important : await !
-    return [{'email': e} for e in emails]  # e est déjà un str grâce à .scalars()
+    emails = await get_all_emails(db)
+    return [{'email': e} for e in emails]

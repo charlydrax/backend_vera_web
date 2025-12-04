@@ -4,6 +4,7 @@ from utils.video import video_to_text
 from utils.image import image_to_text
 from utils.vera import ask_vera
 
+
 # app = FastAPI()
 router = APIRouter(prefix="/webhook", tags=["webhook"])
 
