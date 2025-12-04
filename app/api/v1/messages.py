@@ -12,7 +12,7 @@ router = APIRouter(prefix="/messages", tags=["messages"])
 
 
 @router.post("/ask")
-async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db), user = Depends(get_current_user)):
+async def ask_vera(msg: MessageRequest, db: AsyncSession = Depends(get_db)): #user = Depends(get_current_user, use_cache=False),
     async with httpx.AsyncClient() as client:
         payload = {
             "userId": "anon",
