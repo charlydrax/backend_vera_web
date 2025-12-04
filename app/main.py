@@ -1,30 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1 import auth, messages, webhook_bot, results
 from app.db.base import Base
 from app.db.session import engine
 from dotenv import load_dotenv
 from typing import List, Dict, Any
+from pathlib import Path
 import os
 import httpx
-from fastapi import HTTPException
-from pathlib import Path
 
-# Charger .env
+# Charger .env (en local)
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 app = FastAPI(title="MyApp API")
 
-# CORS — autoriser Angular (dev + prod)
+# CORS — version simple et large pour éviter les blocages navigateur
+# (projet d’école, donc on peut se permettre d’ouvrir)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:4200",
-        "https://vera-front-eight.vercel.app",
-        "https://vera-front-git-main-celias-projects-19b36730.vercel.app"
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],        # autorise toutes les origines
+    allow_credentials=False,    # doit être False si on utilise "*"
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -34,6 +30,7 @@ app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
 app.include_router(messages.router, prefix="/api/v1", tags=["messages"])
 app.include_router(webhook_bot.router, prefix="/api/v1", tags=["webhook"])
 app.include_router(results.router, prefix="/api/v1", tags=["results"])
+
 
 @app.get("/api/v1/survey/results")
 async def get_survey_results() -> List[Dict[str, Any]]:
@@ -79,13 +76,11 @@ async def get_survey_results() -> List[Dict[str, Any]]:
     for i, row in enumerate(values[1:], start=2):
         row_dict: Dict[str, Any] = {"row_number": i}
         for idx, header in enumerate(headers):
-            # Si la ligne est plus courte que le nombre de colonnes
             value = row[idx] if idx < len(row) else None
             row_dict[header] = value
         rows.append(row_dict)
 
     return rows
-
 
 
 # Initialisation async des tables
