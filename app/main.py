@@ -21,6 +21,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:4200",
+        "https://vera-front-eight.vercel.app",
         "https://vera-front-git-main-celias-projects-19b36730.vercel.app"
     ],
     allow_credentials=True,
